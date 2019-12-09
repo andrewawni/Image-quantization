@@ -20,6 +20,12 @@ namespace ImageQuantization
             SetGraphFromColours(uniquePixels);
         }
 
+        public void SetImage(Pixel[,] image)
+        {
+            uniquePixels = GetColoursFromImage(image);
+            SetGraphFromColours(uniquePixels);
+        }
+ 
         private HashSet<Pixel> GetColoursFromImage(Pixel[,] image)
         {
             uniquePixels = new HashSet<Pixel>();
