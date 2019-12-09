@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GenericWeightedGraph.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -52,7 +53,7 @@
     </Compile>
     <Compile Include="ImageOperations.cs" />
     <Compile Include="Pixel.cs" />
-    <Compile Include="PixelsGraph.cs" />
+    <Compile Include="ImageGraph.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="MainForm.resx">
