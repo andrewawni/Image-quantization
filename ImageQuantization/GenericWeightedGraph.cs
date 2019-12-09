@@ -30,7 +30,7 @@ namespace ImageQuantization
             {
                 if (list[i].Key == destination)
                 {
-                    list[i] = new KeyValuePair<UInt32, Type>(destination, default(Type));
+                    list.RemoveAt(i);
                 }
             }
         }
