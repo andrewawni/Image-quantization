@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace ImageQuantization
 {
@@ -88,6 +85,15 @@ namespace ImageQuantization
             value = value << 8;
             value += B;
             return value;
+        }
+        
+        public static Pixel GetPixelFromDecimalValue(UInt32 value)
+        {
+            byte blue = (byte)((value) & 0xFF);
+            byte green = (byte)((value >> 8) & 0xFF);
+            byte red = (byte)((value >> 16) & 0xFF);
+            
+            return new Pixel(red, green, blue);
         }
     }
 

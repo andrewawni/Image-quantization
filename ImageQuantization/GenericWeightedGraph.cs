@@ -15,6 +15,8 @@ namespace ImageQuantization
 
         public void AddEdge(UInt32 source, UInt32 destination, Type weight)
         {
+            if (adjacencyList[source] == null) adjacencyList[source] = new List<KeyValuePair<uint, Type>>();
+            
             KeyValuePair<UInt32, Type> pair = new KeyValuePair<UInt32, Type>(destination, weight);
             adjacencyList[source].Add(pair);
         }
@@ -37,12 +39,17 @@ namespace ImageQuantization
         {
             List<KeyValuePair<UInt32, Type>> list = adjacencyList[source];
             
-            foreach (var Node in list)
-                if (Node.Key == destination) 
-                    return Node.Value;
+            foreach (var node in list)
+                if (node.Key == destination) 
+                    return node.Value;
 
             //Edge not set
             return default(Type);
+        }
+
+        public List<KeyValuePair<UInt32, Type>> AdjacentNodes(UInt32 index)
+        {
+            return adjacencyList[index];
         }
     }
 }
