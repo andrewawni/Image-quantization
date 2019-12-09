@@ -14,6 +14,7 @@ namespace ImageQuantization
             G = 0;
             B = 0;
         }
+
         public Pixel(byte R, byte G, byte B)
         {
             this.R = R;
