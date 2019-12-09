@@ -15,15 +15,17 @@ namespace ImageQuantization
 
         public ImageGraph(Pixel[,] image)
         {
-            distanceBetweenColours = new GenericWeightedGraph<double>(2 << 24);
             uniquePixels = GetColoursFromImage(image);
+            distanceBetweenColours = new GenericWeightedGraph<double>(uniquePixels.Count);
             SetGraphFromColours(uniquePixels);
         }
 
         public void SetImage(Pixel[,] image)
         {
             uniquePixels = GetColoursFromImage(image);
+            distanceBetweenColours = new GenericWeightedGraph<double>(uniquePixels.Count);
             SetGraphFromColours(uniquePixels);
+            
         }
  
         private HashSet<Pixel> GetColoursFromImage(Pixel[,] image)
