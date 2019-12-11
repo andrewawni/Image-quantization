@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace ImageQuantization
 {
-    class ImageGraph
+    public class ImageGraph
     {
-        private GenericWeightedGraph<Double> distanceBetweenColours;
+        private GenericWeightedGraph<double> distanceBetweenColours;
         private HashSet<UInt32> uniquePixels;
 
         public ImageGraph()
@@ -47,9 +47,10 @@ namespace ImageQuantization
             {
                 foreach (var pixel2 in uniquePixels)
                 {
-                    Double eucledianDistance = CalculateEuclideanDistance(pixel1, pixel2);
+                    double eucledianDistance = CalculateEuclideanDistance(pixel1, pixel2);
                     distanceBetweenColours.AddEdge(pixel1, pixel2, eucledianDistance);
                 }
+                distanceBetweenColours.IncrementVertices();
             }
         }
 
@@ -62,6 +63,11 @@ namespace ImageQuantization
             Double bdiff = p1.getBlue() - p2.getBlue();
 
             return (rdiff * rdiff) + (gdiff * gdiff) + (bdiff * bdiff);
+        }
+
+        public GenericWeightedGraph<Double> GetGenericGraph()
+        {
+            return distanceBetweenColours;
         }
 
         //Kept for debugging purposes
