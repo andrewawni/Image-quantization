@@ -18,26 +18,37 @@ namespace ImageQuantization
     }
     public class MinumumSpanningTree
     {
-        private DisjointSet<int> set=new DisjointSet<int>();
+        private DisjointSet<UInt32> set=new DisjointSet<UInt32>();
         public GenericWeightedGraph<double> tree=new GenericWeightedGraph<double>(2<<24);
 
         public void ConstructTree(ImageGraph graph)
         {
-            for (int i = 0; i < graph.GetGenericGraph().NumberOfVertices(); ++i)
+            foreach (var v in graph.GetVertices())
             {
-                set.MakeSet(i);
+                set.MakeSet(v);
             }
             
             graph.GetGenericGraph().GetEdges().Sort(new ToCompare<double>());
-
+            
             foreach (var e in graph.GetGenericGraph().GetEdges())
             {
                 if (set.Find(e.source) != set.Find(e.dest))
                 {
-                    tree.AddEdge((UInt32)e.source,(UInt32)e.dest,e.weight);
+                    tree.AddEdge(e.source,e.dest,e.weight);
                     set.Union(set.Find(e.source),set.Find(e.dest));
                 }
             }
+        }
+        
+        public double SumOfTree()
+        {
+            double mstSum = 0;
+            foreach (var edge in tree.GetEdges())
+            {
+                mstSum += Math.Sqrt(edge.weight);
+            }
+
+            return mstSum;
         }
     }
 }

@@ -11,7 +11,7 @@ namespace ImageQuantization
         [STAThread]
         static void Main()
         {
-           Pixel[,] mat = new Pixel[4,4];
+           /*Pixel[,] mat = new Pixel[4,4];
             
             mat[0,0]=new Pixel(190,252,81);
             mat[0,1]=new Pixel(242,255,0);
@@ -38,7 +38,9 @@ namespace ImageQuantization
             Console.WriteLine("\n");
             MinumumSpanningTree t=new MinumumSpanningTree();
             t.ConstructTree(gr);
-            t.tree.PrintEdges();
+            t.tree.PrintEdges();*/
+            
+            
           
             
             Application.EnableVisualStyles();

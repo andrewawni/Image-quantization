@@ -16,23 +16,27 @@ namespace ImageQuantization
             }
         }
 
-        private List<subset> set=new List<subset>();
+        //private List<subset> set=new List<subset>();
+        private Dictionary<Type,subset> Dset=new Dictionary<Type, subset>();
+
         public void MakeSet(Type x)
         {
             subset s=new subset(x);
             s.rank = 0;
-            set.Add(s);
+            //set.Add(s);
+            Dset.Add(x,s);
         }
 
         public Type Find(Type x)
         {
-            subset s=new subset(x);
-            if (!s.parent.Equals(x))
+            //subset s=new subset(x);
+            
+            if (!Dset[x].parent.Equals(x))
             {
-                s.parent = Find(s.parent);
+                Dset[x].parent = Find(Dset[x].parent);
             }
 
-            return s.parent;
+            return Dset[x].parent;
         }
 
         public void Union(Type x, Type y)
@@ -40,24 +44,24 @@ namespace ImageQuantization
             Type xRoot = Find(x);
             Type yRoot = Find(y);
             
-            subset xR=new subset(xRoot);
-            subset yR=new subset(yRoot);
+            //subset xR=new subset(xRoot);
+            //subset yR=new subset(yRoot);
             
             
             if (xRoot.Equals(yRoot))
                 return;
             
-            if(xR.rank<yR.rank)
+            if(Dset[x].rank<Dset[y].rank)
             {
                 Type tmp = yRoot;
                 yRoot = xRoot;
                 xRoot = yRoot;
             }
 
-            yR.parent = xRoot;
-            if (xR.rank == yR.rank)
+            Dset[y].parent = xRoot;
+            if (Dset[x].rank == Dset[y].rank)
             {
-                xR.rank++;
+                Dset[x].rank++;
             }
         }
 

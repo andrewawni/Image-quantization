@@ -70,6 +70,11 @@ namespace ImageQuantization
             return distanceBetweenColours;
         }
 
+        public HashSet<UInt32> GetVertices()
+        {
+            return uniquePixels;
+        }
+
         //Kept for debugging purposes
         public void Print()
         {
@@ -82,5 +87,6 @@ namespace ImageQuantization
                 Console.WriteLine();
             }
         }
+        
     }
 }

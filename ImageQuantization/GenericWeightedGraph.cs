@@ -6,11 +6,11 @@ namespace ImageQuantization
 {
     public class Edge<EType> 
     {
-        public int source;
-        public int dest;
+        public UInt32 source;
+        public UInt32 dest;
         public EType weight;
 
-        public Edge(int src, int des, EType wght)
+        public Edge(UInt32 src, UInt32 des, EType wght)
         {
             source = src;
             dest = des;
@@ -27,6 +27,7 @@ namespace ImageQuantization
         private int numOfVertices = 0;
         private List<Edge<Type>> edges;
         
+        
         public GenericWeightedGraph(int size)
         {
             adjacencyList = new List<KeyValuePair<UInt32, Type>>[size];
@@ -39,7 +40,7 @@ namespace ImageQuantization
             
             KeyValuePair<UInt32, Type> pair = new KeyValuePair<UInt32, Type>(destination, weight);
             adjacencyList[source].Add(pair);
-            Edge<Type> e=new Edge<Type>((int)source,(int)destination,weight);
+            Edge<Type> e=new Edge<Type>(source,destination,weight);
             edges.Add(e);
             numOfEdges++;
         }
@@ -106,6 +107,8 @@ namespace ImageQuantization
                 Console.WriteLine(e.weight+"\t\t"+e.source+"\t\t"+e.dest);
             }
         }
+    
+    
     }
     
     
