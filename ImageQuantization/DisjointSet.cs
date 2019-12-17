@@ -5,6 +5,8 @@ namespace ImageQuantization
 {
     public class DisjointSet<Type>
     {
+        private Dictionary<Type,subset> Dset=new Dictionary<Type, subset>();
+        
         public class subset
         {
             public Type parent;
@@ -15,39 +17,26 @@ namespace ImageQuantization
                 parent = p;
             }
         }
-
-        //private List<subset> set=new List<subset>();
-        private Dictionary<Type,subset> Dset=new Dictionary<Type, subset>();
-
         public void MakeSet(Type x)
         {
             subset s=new subset(x);
             s.rank = 0;
-            //set.Add(s);
             Dset.Add(x,s);
         }
 
         public Type Find(Type x)
         {
-            //subset s=new subset(x);
-            
             if (!Dset[x].parent.Equals(x))
-            {
                 Dset[x].parent = Find(Dset[x].parent);
-            }
 
             return Dset[x].parent;
         }
-
+        
         public void Union(Type x, Type y)
         {
             Type xRoot = Find(x);
             Type yRoot = Find(y);
-            
-            //subset xR=new subset(xRoot);
-            //subset yR=new subset(yRoot);
-            
-            
+
             if (xRoot.Equals(yRoot))
                 return;
             
@@ -60,10 +49,7 @@ namespace ImageQuantization
 
             Dset[y].parent = xRoot;
             if (Dset[x].rank == Dset[y].rank)
-            {
                 Dset[x].rank++;
-            }
         }
-
     }
 }

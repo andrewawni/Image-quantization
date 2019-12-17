@@ -53,7 +53,7 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ImageOperations.cs" />
-    <Compile Include="MinumumSpanningTree.cs" />
+    <Compile Include="MinimumSpanningTree.cs" />
     <Compile Include="Pixel.cs" />
     <Compile Include="ImageGraph.cs" />
     <Compile Include="Program.cs" />
