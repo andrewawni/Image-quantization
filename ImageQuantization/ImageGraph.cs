@@ -23,12 +23,14 @@ namespace ImageQuantization
         public void SetImage(Pixel[,] image)
         {
             uniquePixels = GetColoursFromImage(image);
-            distanceBetweenColours = new GenericWeightedGraph<double>(uniquePixels.Count);
+            distanceBetweenColours = new GenericWeightedGraph<double>(2 << 24);
             SetGraphFromColours();
         }
 
         private HashSet<UInt32> GetColoursFromImage(Pixel[,] image)
         {
+            //TODO: Set lengths to variables.
+            //TODO: Maybe use an array 
             uniquePixels = new HashSet<UInt32>();
             for (int i = 0; i < image.GetLength(0); i++)
             {
@@ -74,19 +76,5 @@ namespace ImageQuantization
         {
             return uniquePixels;
         }
-
-        //Kept for debugging purposes
-        public void Print()
-        {
-            foreach (var i in uniquePixels)
-            {    
-                var colour = "Colour " + i + " :";
-                Console.Write(colour);
-                foreach (var j in distanceBetweenColours.AdjacentNodes(i))
-                    Console.Write(" " + j);
-                Console.WriteLine();
-            }
-        }
-        
     }
 }

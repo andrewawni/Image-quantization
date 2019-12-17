@@ -4,29 +4,26 @@ using System.Collections;
 
 namespace ImageQuantization
 {
+    //TODO: Update to Prim's algorithm
     public class ToCompare<CType> : IComparer<Edge<CType>>
     {
         public int Compare(Edge<CType> x, Edge<CType> y)
         {
             if (x.weight.Equals(y.weight) || y.weight.Equals(x.weight))
-            {
                 return 0;
-            }
 
             return ((new CaseInsensitiveComparer().Compare(x.weight, y.weight)));
         }
     }
-    public class MinumumSpanningTree
+    public class MinimumSpanningTree
     {
         private DisjointSet<UInt32> set=new DisjointSet<UInt32>();
-        public GenericWeightedGraph<double> tree=new GenericWeightedGraph<double>(2<<24);
+        public GenericWeightedGraph<double> tree=new GenericWeightedGraph<double>();
 
         public void ConstructTree(ImageGraph graph)
         {
             foreach (var v in graph.GetVertices())
-            {
                 set.MakeSet(v);
-            }
             
             graph.GetGenericGraph().GetEdges().Sort(new ToCompare<double>());
             
@@ -44,9 +41,7 @@ namespace ImageQuantization
         {
             double mstSum = 0;
             foreach (var edge in tree.GetEdges())
-            {
                 mstSum += Math.Sqrt(edge.weight);
-            }
 
             return mstSum;
         }
