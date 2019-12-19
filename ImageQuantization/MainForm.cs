@@ -28,8 +28,8 @@ namespace ImageQuantization
                 ImageOperations.DisplayImage(ImageMatrix, pictureBox1);
             }
             ImageGraph gr = new ImageGraph(ImageMatrix);
-            MinimumSpanningTree t=new MinimumSpanningTree();
-            t.ConstructTree(gr);
+            PrimMinSpanningTree t=new PrimMinSpanningTree(1 << 24, gr);
+            t.printMST();
             Console.WriteLine("\n Sum of MST : "+Math.Round(t.SumOfTree(),2));
             Console.WriteLine(gr.GetVertices().Count);
             txtWidth.Text = ImageOperations.GetWidth(ImageMatrix).ToString();

@@ -6,7 +6,7 @@ namespace ImageQuantization
     public class ImageGraph
     {
         private GenericWeightedGraph<double> distanceBetweenColours;
-        private HashSet<UInt32> uniquePixels;
+        private HashSet<int> uniquePixels;
 
         public ImageGraph()
         {
@@ -27,11 +27,11 @@ namespace ImageQuantization
             SetGraphFromColours();
         }
 
-        private HashSet<UInt32> GetColoursFromImage(Pixel[,] image)
+        private HashSet<int> GetColoursFromImage(Pixel[,] image)
         {
             //TODO: Set lengths to variables.
             //TODO: Maybe use an array 
-            uniquePixels = new HashSet<UInt32>();
+            uniquePixels = new HashSet<int>();
             for (int i = 0; i < image.GetLength(0); i++)
             {
                 for (int j = 0; j < image.GetLength(1); j++)
@@ -49,20 +49,20 @@ namespace ImageQuantization
             {
                 foreach (var pixel2 in uniquePixels)
                 {
-                    double eucledianDistance = CalculateEuclideanDistance(pixel1, pixel2);
+                    long eucledianDistance = CalculateEuclideanDistance(pixel1, pixel2);
                     distanceBetweenColours.AddEdge(pixel1, pixel2, eucledianDistance);
                 }
                 distanceBetweenColours.IncrementVertices();
             }
         }
 
-        private Double CalculateEuclideanDistance(UInt32 p1Val, UInt32 p2Val)
+        private long CalculateEuclideanDistance(int p1Val, int p2Val)
         {
             Pixel p1 = Pixel.GetPixelFromDecimalValue(p1Val);
             Pixel p2 = Pixel.GetPixelFromDecimalValue(p2Val);
-            Double rdiff = p1.getRed() - p2.getRed();
-            Double gdiff = p1.getGreen() - p2.getGreen();
-            Double bdiff = p1.getBlue() - p2.getBlue();
+            long rdiff = p1.getRed() - p2.getRed();
+            long gdiff = p1.getGreen() - p2.getGreen();
+            long bdiff = p1.getBlue() - p2.getBlue();
 
             return (rdiff * rdiff) + (gdiff * gdiff) + (bdiff * bdiff);
         }
@@ -72,7 +72,7 @@ namespace ImageQuantization
             return distanceBetweenColours;
         }
 
-        public HashSet<UInt32> GetVertices()
+        public HashSet<int> GetVertices()
         {
             return uniquePixels;
         }
