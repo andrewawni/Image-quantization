@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 namespace ImageQuantization
 {
-    public class Edge<EType> 
+    public class Edge 
     {
-        public UInt32 source;
-        public UInt32 dest;
-        public EType weight;
+        public int source;
+        public int dest;
+        public long weight;
 
-        public Edge(UInt32 src, UInt32 des, EType wght)
+        public Edge(int src, int des, long wght)
         {
             source = src;
             dest = des;
@@ -21,24 +21,28 @@ namespace ImageQuantization
     {
         private int numOfEdges=0;
         private int numOfVertices = 0;
-        private List<Edge<Type>> edges;
+        private List<Edge> [] edges;
         
         
         public GenericWeightedGraph(int size)
         {
-            edges=new List<Edge<Type>>(size);
+            edges=new List<Edge>[size];
         }
 
         public GenericWeightedGraph()
         {
-            edges = new List<Edge<Type>>();
+            edges = new List<Edge>[1 << 24];
         }
             
 
-        public void AddEdge(UInt32 source, UInt32 destination, Type weight)
+        public void AddEdge(int source, int destination, long weight)
         {
-            Edge<Type> e=new Edge<Type>(source,destination,weight);
-            edges.Add(e);
+            Edge e = new Edge(source, destination, weight);
+            if(edges[source] == null)
+            {
+                edges[source] = new List<Edge>();
+            }
+            edges[source].Add(e);
             numOfEdges++;
         }
         public int NumberOfEdges()
@@ -56,23 +60,9 @@ namespace ImageQuantization
             return numOfVertices;
         }
 
-        public List<Edge<Type>> GetEdges()
+        public List<Edge> GetEdges(int index)
         {
-            return edges;
+            return edges[index];
         }
-        
-        // Debugging Only
-        public void PrintEdges()
-        {
-            Console.WriteLine("Weight\t\t"+"Source\t\t"+"Dest");
-            foreach (var e in edges)
-            {
-                Console.WriteLine(e.weight+"\t\t"+e.source+"\t\t"+e.dest);
-            }
-        }
-    
-    
     }
-    
-    
 }

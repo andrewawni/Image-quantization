@@ -76,9 +76,9 @@ namespace ImageQuantization
             this.B = B;
         }
         
-        public UInt32 getDecimalValue()
+        public int getDecimalValue()
         {
-            UInt32 value = 0;
+            int value = 0;
             value += R;
             value = value << 8;
             value += G;
@@ -87,7 +87,7 @@ namespace ImageQuantization
             return value;
         }
         
-        public static Pixel GetPixelFromDecimalValue(UInt32 value)
+        public static Pixel GetPixelFromDecimalValue(int value)
         {
             byte blue = (byte)((value) & 0xFF);
             byte green = (byte)((value >> 8) & 0xFF);
