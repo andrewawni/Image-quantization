@@ -53,7 +53,9 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ImageOperations.cs" />
-    <Compile Include="MinimumSpanningTree.cs" />
+    <Compile Include="HeapNode.cs" />
+    <Compile Include="MinHeap.cs" />
+    <Compile Include="PrimMinSpanningTree.cs" />
     <Compile Include="Pixel.cs" />
     <Compile Include="ImageGraph.cs" />
     <Compile Include="Program.cs" />
