@@ -135,6 +135,9 @@ namespace ImageQuantization
                 ImageBMP.UnlockBits(bmd);
             }
             PicBox.Image = ImageBMP;
+            
+            //For testing purposes
+            ImageBMP.Save("image-output");
         }
 
 
