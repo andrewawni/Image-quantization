@@ -34,6 +34,28 @@ namespace ImageQuantization
             Console.WriteLine(gr.GetVertices().Count);
             txtWidth.Text = ImageOperations.GetWidth(ImageMatrix).ToString();
             txtHeight.Text = ImageOperations.GetHeight(ImageMatrix).ToString();
+            
+            Console.WriteLine("Enter K:\n");
+            int k = Convert.ToInt32(Console.ReadLine());
+            Dictionary<int,int> temp =  t.GenerateClusters(k);
+            
+            Console.WriteLine("Mapped colors:\n");
+            foreach (var color in temp.Keys)
+            {
+                Console.WriteLine(color + " : " + temp[color]);
+            }
+
+            int h = ImageOperations.GetHeight(ImageMatrix), w = ImageOperations.GetWidth(ImageMatrix);
+            Pixel[,] output = new Pixel[h, w];
+            for (int i = 0; i < h; i++)
+            {
+                for (int j = 0; j < w; j++)
+                {
+                    output[i,j] = Pixel.GetPixelFromDecimalValue(temp[ImageMatrix[i,j].getDecimalValue()]);
+                }
+            }
+            ImageOperations.DisplayImage(output, pictureBox2);
+            
         }
 
         private void btnGaussSmooth_Click(object sender, EventArgs e)
