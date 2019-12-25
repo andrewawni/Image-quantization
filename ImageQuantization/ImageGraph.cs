@@ -7,10 +7,6 @@ namespace ImageQuantization
     {
         private HashSet<int> uniquePixels;
 
-        public ImageGraph()
-        {
-        }
-
         public ImageGraph(Pixel[,] image)
         {
             uniquePixels = GetColoursFromImage(image);
@@ -33,7 +29,6 @@ namespace ImageQuantization
                     uniquePixels.Add(image[i, j].getDecimalValue());
                 }
             }
-
             return uniquePixels;
         }
 

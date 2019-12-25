@@ -40,6 +40,7 @@ namespace ImageQuantization
                     PQ.Insert(new HeapNode(Color, long.MaxValue));
                     Distance[Color] = long.MaxValue;
                 }
+                
                 Parent[Color] = -1;
             }
 
@@ -127,6 +128,7 @@ namespace ImageQuantization
             {
                 if (!adjacency_list.ContainsKey(color))
                     adjacency_list.Add(color, new List<int>());
+                
                 if (Parent[color] != -1 && !adjacency_list.ContainsKey(Parent[color]))
                     adjacency_list.Add(Parent[color], new List<int>());
 
@@ -167,12 +169,11 @@ namespace ImageQuantization
                         totalB += curr_pixel.getBlue();
 
                     }
-
+                    
                     foreach (int subColor in cluster)
                     {
                         mapped_pallete[subColor] = (new Pixel((byte)(totalR / cluster.Count), (byte)(totalG / cluster.Count), (byte)(totalB / cluster.Count))).getDecimalValue();
                     }
-
                 }
             }
             return mapped_pallete;
