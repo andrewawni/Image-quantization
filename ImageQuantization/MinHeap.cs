@@ -50,9 +50,7 @@ namespace ImageQuantization
         private void Heapify(int Index) // O(log N)
         {
             if (IsLeaf(Index)) // Base Case (useless because we already check size in if conditions below).
-            {
                 return;
-            }
 
             int _Left = Left(Index);
             int _Right = Right(Index);
@@ -61,18 +59,13 @@ namespace ImageQuantization
             // position Index is larger than its childeren..
             // from presentation, slid 8, Lecture 9 (Binary Heap)
             if(_Left <= Size && Heap[Index].Distance > Heap[_Left].Distance)
-            {
                 Smallest = _Left;
-            }
             else
-            {
                 Smallest = Index;
-            }
 
             if(_Right <= Size && Heap[Smallest].Distance > Heap[_Right].Distance)
-            {
                 Smallest = _Right;
-            }
+            
 
             if(Smallest != Index)
             {

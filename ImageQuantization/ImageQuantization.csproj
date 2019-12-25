@@ -44,8 +44,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DisjointSet.cs" />
-    <Compile Include="GenericWeightedGraph.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
