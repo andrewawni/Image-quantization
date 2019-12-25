@@ -39,17 +39,17 @@ namespace ImageQuantization
 
         private void SwapTwoNodes(int First, int Second) // O(1)
         {
-            HeapNode tmp = Heap[First];
-            Heap[First] = Heap[Second];
-            Heap[Second] = tmp;
+            HeapNode tmp = Heap[First];    //O(1)
+            Heap[First] = Heap[Second];    //O(1)
+            Heap[Second] = tmp;            //O(1)
         }
 
         private bool IsLeaf(int Index) // O(1)
         {
-            return (Index > Size / 2 && Index <= Size);
+            return (Index > Size / 2 && Index <= Size);    //O(1)
         }
 
-        private void Heapify(int Index) // O(log N)
+        private void Heapify(int Index) // O(log n)
         {
             // Base Case (useless because we already check size in if conditions below).
             if (IsLeaf(Index)) //O(1)
@@ -57,14 +57,14 @@ namespace ImageQuantization
 
             int _Left = Left(Index);      //O(1)
             int _Right = Right(Index);    //O(1)
-            int Smallest;
+            int Smallest;                 //O(1)
 
             // position Index is larger than its children..
             // from presentation, slid 8, Lecture 9 (Binary Heap)
             if(_Left <= Size && Heap[Index].Distance > Heap[_Left].Distance) //O(1)
-                Smallest = _Left;
+                Smallest = _Left;                                            //O(1)
             else
-                Smallest = Index;
+                Smallest = Index;                                            //O(1)
 
             if(_Right <= Size && Heap[Smallest].Distance > Heap[_Right].Distance) //O(1)
                 Smallest = _Right;
@@ -72,9 +72,9 @@ namespace ImageQuantization
 
             if(Smallest != Index)
             {
-                indexer[Heap[Smallest].Id] = Index;
-                indexer[Heap[Index].Id] = Smallest;
-                SwapTwoNodes(Smallest, Index); //O(1)
+                indexer[Heap[Smallest].Id] = Index;            //O(1)
+                indexer[Heap[Index].Id] = Smallest;            //O(1)
+                SwapTwoNodes(Smallest, Index);   //O(1)
                 Heapify(Smallest);
             }
         }
