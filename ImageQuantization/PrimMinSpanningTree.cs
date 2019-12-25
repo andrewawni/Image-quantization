@@ -85,19 +85,7 @@ namespace ImageQuantization
 
             return mstSum;
         }
-
-        public void printMST()
-        {
-            long total_min_weight = 0;
-            foreach (int Color in DistinctColors)
-            {
-                Console.WriteLine("Edge: " + Color + " - " + Parent[Color] +
-                                  " weight: " + Distance[Color]);
-                total_min_weight += Distance[Color];
-            }
-
-            Console.WriteLine("Total minimum key: " + total_min_weight);
-        }
+        
 
         public Dictionary<int, int> GenerateClusters(int num_clusters)
         {
@@ -172,7 +160,11 @@ namespace ImageQuantization
                     
                     foreach (int subColor in cluster)
                     {
-                        mapped_pallete[subColor] = (new Pixel((byte)(totalR / cluster.Count), (byte)(totalG / cluster.Count), (byte)(totalB / cluster.Count))).getDecimalValue();
+                        mapped_pallete[subColor] = new Pixel(
+                                        (byte)(totalR / cluster.Count), 
+                                        (byte)(totalG / cluster.Count), 
+                                        (byte)(totalB / cluster.Count)
+                                            ).getDecimalValue();
                     }
                 }
             }
