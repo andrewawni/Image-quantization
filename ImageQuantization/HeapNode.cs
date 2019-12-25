@@ -11,8 +11,8 @@ namespace ImageQuantization
         public long Distance;
         public HeapNode(int Id, long Distance)
         {
-            this.Id = Id;
-            this.Distance = Distance;
+            this.Id = Id;                //O(1)
+            this.Distance = Distance;    //O(1)
         }
     }
 }
