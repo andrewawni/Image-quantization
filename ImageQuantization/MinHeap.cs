@@ -13,9 +13,11 @@ namespace ImageQuantization
 
         public MinHeap(int Capacity)
         {
-            Heap = new HeapNode[Capacity + 1]; // one based heap
-
-            Heap[0] = new HeapNode(-1, long.MinValue); //unused index
+            // one based heap
+            Heap = new HeapNode[Capacity + 1];    //O(1)
+            
+            //unused index
+            Heap[0] = new HeapNode(-1, long.MinValue);     //O(1)
             indexer = new int[Capacity + 1];
             Size = 0;
         }
@@ -49,21 +51,22 @@ namespace ImageQuantization
 
         private void Heapify(int Index) // O(log N)
         {
-            if (IsLeaf(Index)) // Base Case (useless because we already check size in if conditions below).
+            // Base Case (useless because we already check size in if conditions below).
+            if (IsLeaf(Index)) //O(1)
                 return;
 
-            int _Left = Left(Index);
-            int _Right = Right(Index);
+            int _Left = Left(Index);      //O(1)
+            int _Right = Right(Index);    //O(1)
             int Smallest;
 
-            // position Index is larger than its childeren..
+            // position Index is larger than its children..
             // from presentation, slid 8, Lecture 9 (Binary Heap)
-            if(_Left <= Size && Heap[Index].Distance > Heap[_Left].Distance)
+            if(_Left <= Size && Heap[Index].Distance > Heap[_Left].Distance) //O(1)
                 Smallest = _Left;
             else
                 Smallest = Index;
 
-            if(_Right <= Size && Heap[Smallest].Distance > Heap[_Right].Distance)
+            if(_Right <= Size && Heap[Smallest].Distance > Heap[_Right].Distance) //O(1)
                 Smallest = _Right;
             
 
@@ -71,30 +74,31 @@ namespace ImageQuantization
             {
                 indexer[Heap[Smallest].Id] = Index;
                 indexer[Heap[Index].Id] = Smallest;
-                SwapTwoNodes(Smallest, Index);
+                SwapTwoNodes(Smallest, Index); //O(1)
                 Heapify(Smallest);
             }
         }
-        public void MoveUp(int Current) // O(log n)
+        
+        public void MoveUp(int Current) 
         {
-            while (Heap[Current].Distance < Heap[Parent(Current)].Distance)
+            while (Heap[Current].Distance < Heap[Parent(Current)].Distance) // O(log n)
             {
                 // Swap Indexes
                 indexer[Heap[Current].Id] = Parent(Current);
                 indexer[Heap[Parent(Current)].Id] = Current;
                 // Swap Values
-                SwapTwoNodes(Current, Parent(Current));
+                SwapTwoNodes(Current, Parent(Current)); //O(1)
                 // Move Up
                 Current = Parent(Current);
             }
         }
-        public void Insert(HeapNode NewNode)
+        public void Insert(HeapNode NewNode) //O(log n)
         {
             Size++; // one based
             Heap[Size] = NewNode;
             indexer[NewNode.Id] = Size;
             // keep the structure of the binary heap..
-            MoveUp(Size);
+            MoveUp(Size); //O(log n)
         }
 
         public HeapNode ExtractMin()

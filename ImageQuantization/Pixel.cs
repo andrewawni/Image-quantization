@@ -40,42 +40,6 @@ namespace ImageQuantization
             return B;
         }
 
-        public void update(byte R, byte G, byte B)
-        {
-            this.R = R;
-            this.G = G;
-            this.B = B;
-        }
-
-        public void update(Pixel pixel)
-        {
-            R = pixel.getRed();
-            G = pixel.getGreen();
-            B = pixel.getBlue();
-        }
-
-        public void update(DPixel pixel)
-        {
-            R = (byte)pixel.getRed();
-            G = (byte)pixel.getGreen();
-            B = (byte)pixel.getBlue();
-        }
-
-        public void updateRed(byte R)
-        {
-            this.R = R;
-        }
-
-        public void updateGreen(byte G)
-        {
-            this.G = G;
-        }
-
-        public void updateBlue(byte B)
-        {
-            this.B = B;
-        }
-        
         public int getDecimalValue()
         {
             int value = 0;
@@ -133,21 +97,6 @@ namespace ImageQuantization
         {
             this.R = R;
             this.G = G;
-            this.B = B;
-        }
-
-        public void updateRed(double R)
-        {
-            this.R = R;
-        }
-
-        public void updateGreen(double G)
-        {
-            this.G = G;
-        }
-
-        public void updateBlue(double B)
-        {
             this.B = B;
         }
     }

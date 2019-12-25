@@ -9,33 +9,26 @@ namespace ImageQuantization
 
         public ImageGraph(Pixel[,] image)
         {
-            uniquePixels = GetColoursFromImage(image);
-        }
-
-        public void SetImage(Pixel[,] image)
-        {
-            uniquePixels = GetColoursFromImage(image);
+            uniquePixels = GetColoursFromImage(image);   //O(N×M)
         }
 
         private HashSet<int> GetColoursFromImage(Pixel[,] image)
         {
-            //TODO: Set lengths to variables.
-            //TODO: Maybe use an array 
-            uniquePixels = new HashSet<int>();
-            for (int i = 0; i < image.GetLength(0); i++)
+            uniquePixels = new HashSet<int>();            //O(1)
+            int lengthI = image.GetLength(0);  //O(1)
+            int lengthJ = image.GetLength(1);  //O(1)
+            for (int i = 0; i < lengthI; i++)             //O(N)
             {
-                for (int j = 0; j < image.GetLength(1); j++)
-                {
-                    uniquePixels.Add(image[i, j].getDecimalValue());
-                }
+                for (int j = 0; j < lengthJ; j++)         //O(M) 
+                    uniquePixels.Add(image[i, j].getDecimalValue()); //O(1)
             }
-            return uniquePixels;
+            return uniquePixels;                         //O(1)
         }
 
 
         public HashSet<int> GetVertices()
         {
-            return uniquePixels;
+            return uniquePixels;                        //O(1)
         }
     }
 }
