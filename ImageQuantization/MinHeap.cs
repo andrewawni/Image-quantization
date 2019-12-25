@@ -44,7 +44,7 @@ namespace ImageQuantization
 
         private bool IsLeaf(int Index) // O(1)
         {
-            return (Index >= Size / 2 && Index <= Size);
+            return (Index > Size / 2 && Index <= Size);
         }
 
         private void Heapify(int Index) // O(log N)
