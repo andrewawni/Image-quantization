@@ -1,0 +1,11 @@
+3829./Tests/Complete_Test/Large/Large.Case1.bmp
+2566./Tests/Complete_Test/Large/Large.Case2.bmp
+1737./Tests/Complete_Test/Medium/Medium.Case1.bmp
+2284./Tests/Complete_Test/Medium/Medium.Case2.bmp
+192./Tests/Complete_Test/Small/Small.Case1.bmp
+2160./Tests/Complete_Test/Small/Small.Case2.bmp
+3./Tests/Sample_Test/Case1/Sample.Case1.bmp
+2./Tests/Sample_Test/Case2/Sample.Case2.bmp
+500./Tests/Sample_Test/Case3/Sample.Case3.bmp
+10./Tests/Sample_Test/Case4/Sample.Case4.bmp
+32./Tests/Sample_Test/Case5/Sample.Case5.bmp
