@@ -16,85 +16,92 @@ namespace ImageQuantization
         public MainForm()
         {
             InitializeComponent();
-            /**
-             * uncomment to run full benchmark,
-             * place all pictures in the project directory
-             */
-            
-            /*
-            List<KeyValuePair<string, int>> paths = new List<KeyValuePair<string, int>>();
-            
-            StreamReader file = new StreamReader(@"../../paths.txt"); //move up from ./bin/debug
-            StreamWriter outfile = new StreamWriter(@"../../benchmark.txt");
-            string path = "";
-            int k;
-            string line;
-            while ((line = file.ReadLine()) != null)
+            Console.WriteLine("1-Run the program.\n2-Benchmark cases.");
+            int choice = Console.Read();
+            if (choice == '2')
             {
-                string num = line.Substring(0, line.IndexOf('.'));
-                k = Int32.Parse(num);
-                path = line.Substring(line.IndexOf('.'), line.Length - line.IndexOf('.'));
-                //Console.WriteLine(k + " " + path);
-                paths.Add(new KeyValuePair<string, int>("../."+path, k));
-            }
+                /**
+                 * uncomment to run full benchmark,
+                 * place all pictures in the project directory
+                 */
 
-            
-            Stopwatch stopwatch = new Stopwatch();
+                //    /*
+                Console.WriteLine();
+                List<KeyValuePair<string, int>> paths = new List<KeyValuePair<string, int>>();
 
-            for (int img = paths.Count - 1; img >= 0; img--)
-            {
-
-
-                ImageMatrix = ImageOperations.OpenImage(paths[img].Key);
-                k = paths[img].Value;
-                //ImageOperations.DisplayImage(ImageMatrix, pictureBox1);
-                string imgname = "k=" + k + "_" +
-                                 paths[img].Key.Substring(paths[img].Key.LastIndexOf('/') + 1, path.Length - path.LastIndexOf('/') - 1);
-
-                outfile.WriteLine(imgname);
-                Console.WriteLine(imgname);
-
-                stopwatch.Start();
-                ImageGraph gr = new ImageGraph(ImageMatrix);
-                PrimMinSpanningTree t = new PrimMinSpanningTree(1 << 24, gr);
-
-                Console.WriteLine("Distinct colors: " + gr.GetVertices().Count);
-                outfile.WriteLine("Distinct colors: " + gr.GetVertices().Count);
-
-
-                Console.WriteLine("MST sum: " + Math.Round(t.SumOfTree(), 2));
-                outfile.WriteLine("MST sum: " + Math.Round(t.SumOfTree(), 2));
-
-                //txtWidth.Text = ImageOperations.GetWidth(ImageMatrix).ToString();
-                ///txtHeight.Text = ImageOperations.GetHeight(ImageMatrix).ToString();
-
-                Dictionary<int, int> temp = t.GenerateClusters(k);
-                int h = ImageOperations.GetHeight(ImageMatrix), w = ImageOperations.GetWidth(ImageMatrix);
-                Pixel[,] output = new Pixel[h, w];
-                for (int i = 0; i < h; i++)
+                StreamReader file = new StreamReader(@"../../paths.txt"); //move up from ./bin/debug
+                StreamWriter outfile = new StreamWriter(@"../../benchmark.txt");
+                string path = "";
+                int k;
+                string line;
+                while ((line = file.ReadLine()) != null)
                 {
-                    for (int j = 0; j < w; j++)
-                    {
-                        output[i, j] = Pixel.GetPixelFromDecimalValue(temp[ImageMatrix[i, j].getDecimalValue()]);
-                    }
+                    string num = line.Substring(0, line.IndexOf('.'));
+                    k = Int32.Parse(num);
+                    path = line.Substring(line.IndexOf('.'), line.Length - line.IndexOf('.'));
+                    //Console.WriteLine(k + " " + path);
+                    paths.Add(new KeyValuePair<string, int>("../." + path, k));
                 }
 
-                stopwatch.Stop();
-                Console.WriteLine("Time elapsed: {0:hh\\:mm\\:ss\\.fff}", stopwatch.Elapsed);
-                outfile.WriteLine("Time elapsed: {0:hh\\:mm\\:ss\\.fff}", stopwatch.Elapsed);
 
-                stopwatch.Reset();
-                //ImageOperations.DisplayImage(output, pictureBox2);
+                Stopwatch stopwatch = new Stopwatch();
 
-                Console.WriteLine(imgname);
-                saveImage(@imgname, output);
+                for (int img = paths.Count - 1; img >= 0; img--)
+                {
 
-                outfile.WriteLine("====================================");
+                    path = paths[img].Key;
+                    ImageMatrix = ImageOperations.OpenImage(paths[img].Key);
+                    k = paths[img].Value;
+                    //ImageOperations.DisplayImage(ImageMatrix, pictureBox1);
+                    string imgname = "k=" + k + "_" +
+                                     paths[img].Key.Substring(paths[img].Key.LastIndexOf('/') + 1,
+                                         path.Length - path.LastIndexOf('/') - 1);
+
+                    outfile.WriteLine(imgname);
+                    Console.WriteLine(imgname);
+
+                    stopwatch.Start();
+                    ImageGraph gr = new ImageGraph(ImageMatrix);
+                    PrimMinSpanningTree t = new PrimMinSpanningTree(1 << 24, gr);
+
+                    Console.WriteLine("Distinct colors: " + gr.GetVertices().Count);
+                    outfile.WriteLine("Distinct colors: " + gr.GetVertices().Count);
+
+
+                    Console.WriteLine("MST sum: " + Math.Round(t.SumOfTree(), 2));
+                    outfile.WriteLine("MST sum: " + Math.Round(t.SumOfTree(), 2));
+
+                    //txtWidth.Text = ImageOperations.GetWidth(ImageMatrix).ToString();
+                    ///txtHeight.Text = ImageOperations.GetHeight(ImageMatrix).ToString();
+
+                    Dictionary<int, int> temp = t.GenerateClusters(k);
+                    int h = ImageOperations.GetHeight(ImageMatrix), w = ImageOperations.GetWidth(ImageMatrix);
+                    Pixel[,] output = new Pixel[h, w];
+                    for (int i = 0; i < h; i++)
+                    {
+                        for (int j = 0; j < w; j++)
+                        {
+                            output[i, j] = Pixel.GetPixelFromDecimalValue(temp[ImageMatrix[i, j].getDecimalValue()]);
+                        }
+                    }
+
+                    stopwatch.Stop();
+                    Console.WriteLine("Time elapsed: {0:hh\\:mm\\:ss\\.fff}", stopwatch.Elapsed);
+                    outfile.WriteLine("Time elapsed: {0:hh\\:mm\\:ss\\.fff}", stopwatch.Elapsed);
+
+                    stopwatch.Reset();
+                    //ImageOperations.DisplayImage(output, pictureBox2);
+
+                    saveImage(@imgname, output);
+
+                    outfile.WriteLine("====================================");
+                    Console.WriteLine("====================================");
+                }
+
+                outfile.Close();
+                file.Close();
+                // */
             }
-
-            outfile.Close();
-            file.Close();
-            */
         }
 
         private void saveImage(string name, Pixel[,] img)
